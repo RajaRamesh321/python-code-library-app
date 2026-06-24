@@ -18,7 +18,7 @@ services:
     networks:
       - mynetwork
 
-  book:
+  book_service:
     image: rajagadi/pyapp:book_image
     deploy:
       replicas: 1
@@ -29,7 +29,7 @@ services:
     depends_on:
       - db
 
-  borrow:
+  borrow_service:
     image: rajagadi/pyapp:borrow_image
     deploy:
       replicas: 1
@@ -45,13 +45,13 @@ services:
     deploy:
       replicas: 1
     ports:
-      - "5001:5000"
+      - "5001:5001"
     networks:
       - mynetwork
     depends_on:
-      - auth
-      - book
-      - borrow
+      - auth_service
+      - book_service
+      - borrow_service
 
 networks:
   mynetwork:
