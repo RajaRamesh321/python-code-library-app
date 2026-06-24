@@ -1,53 +1,52 @@
 ---
 services:
-  db:
-    image: shaikmustafa/pyapp:db_image
+   db:
+    image:rajagadi/pyapp:db_image
     deploy:
-      replicas: 1
+       replicas: 1
     ports:
       - "3306:3306"
     networks:
       - mynetwork
-
-  auth_service:
-    image: shaikmustafa/pyapp:auth_image
+   auth:
+    image:rajagadi/pyapp:auth_image
     deploy:
-      replicas: 1
+       replicas: 1
     ports:
-      - "5001:5001"
+      - "5000:5000"
     networks:
       - mynetwork
-    depends_on:
-      - db
-    
 
-  book_service:
-    image: shaikmustafa/pyapp:book_image
+   book:
+    image:rajagadi/pyapp:book_image
     deploy:
-      replicas: 1
+       replicas: 1
     ports:
       - "5002:5002"
     networks:
       - mynetwork
     depends_on:
       - db
-  borrow_service:
-    image: shaikmustafa/pyapp:borrow_image
+    
+
+   borrow:
+    image:rajagadi/pyapp:borrow_image
     deploy:
-      replicas: 1
+       replicas: 1
     ports:
       - "5003:5003"
     networks:
       - mynetwork
     depends_on:
       - db
+    
 
-  frontend:
-    image: shaikmustafa/pyapp:frontend
+   frontend:
+    image:rajagadi/pyapp:frontend
     deploy:
-      replicas: 1
+       replicas: 1
     ports:
-      - "5000:5000"
+      - "5001:5001"
     networks:
       - mynetwork
     depends_on:
@@ -55,6 +54,8 @@ services:
       - book
       - borrow
 
+  
 networks:
   mynetwork:
     driver: overlay
+      
