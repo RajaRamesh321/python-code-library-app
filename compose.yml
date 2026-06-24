@@ -9,7 +9,7 @@ services:
     networks:
       - mynetwork
 
-  auth:
+  auth_service:
     image: rajagadi/pyapp:auth_image
     deploy:
       replicas: 1
